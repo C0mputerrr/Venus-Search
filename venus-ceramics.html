@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venus Ceramics — Atelier of Surfaces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bone: #f4efe6;
+    --bone-deep: #ebe3d5;
+    --ink: #1a1612;
+    --ink-soft: #3a342c;
+    --terracotta: #b04a2f;
+    --terracotta-deep: #8a3722;
+    --umber: #6b5a44;
+    --sage: #7a8471;
+    --gold: #c9a55c;
+    --shadow: rgba(26, 22, 18, 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: var(--bone);
+    color: var(--ink);
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-image: 
+      radial-gradient(ellipse at top left, rgba(176, 74, 47, 0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(122, 132, 113, 0.05) 0%, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(26, 22, 18, 0.08);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .brand-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bone);
+    display: grid;
+    place-items: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-text {
+    line-height: 1.1;
+  }
+  
+  .brand-text .name {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .brand-text .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--umber);
+    margin-top: 2px;
+  }
+
+  nav {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+
+  nav a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--terracotta); }
+
+  .established {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--umber);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    z-index: 5;
+    padding: 80px 48px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 60px;
+    align-items: end;
+  }
+
+  .hero-text .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--terracotta);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(56px, 7vw, 104px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--terracotta);
+    font-variation-settings: "opsz" 144;
+  }
+
+  .hero-aside {
+    padding-bottom: 12px;
+    border-left: 1px solid rgba(26, 22, 18, 0.15);
+    padding-left: 32px;
+  }
+
+  .hero-aside p {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 360px;
+  }
+
+  .hero-aside .meta {
+    margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--umber);
+  }
+
+  /* ===== SEARCH PANEL ===== */
+  .search-section {
+    position: relative;
+    z-index: 5;
+    max-width: 1400px;
+    margin: 40px auto 0;
+    padding: 0 48px;
+  }
+
+  .search-panel {
+    background: linear-gradient(180deg, #faf6ed 0%, #f4ecdc 100%);
+    border: 1px solid rgba(26, 22, 18, 0.1);
+    border-radius: 2px;
+    padding: 40px;
+    box-shadow: 0 30px 60px -20px var(--shadow), 0 0 0 1px rgba(255,255,255,0.5) inset;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .search-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--terracotta) 0%, var(--gold) 50%, var(--sage) 100%);
+  }
+
+  .search-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+  }
+
+  .search-header .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--umber);
+  }
+
+  .search-header .ai-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--terracotta);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ai-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    box-shadow: 0 0 0 0 var(--terracotta);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(176,74,47,0.6); }
+    50% { box-shadow: 0 0 0 8px rgba(176,74,47,0); }
+  }
+
+  .search-input-wrap {
+    position: relative;
+  }
+
+  #searchInput {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--ink);
+    padding: 12px 80px 12px 0;
+    outline: none;
+    border-bottom: 1px solid rgba(26, 22, 18, 0.2);
+    transition: border-color 0.3s;
+  }
+
+  #searchInput:focus { border-bottom-color: var(--terracotta); }
+
+  #searchInput::placeholder {
+    color: rgba(26, 22, 18, 0.3);
+    font-style: italic;
+  }
+
+  .search-btn {
+    position: absolute;
+    right: 0;
+    bottom: 12px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: var(--ink);
+    color: var(--bone);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .search-btn:hover {
+    background: var(--terracotta);
+    transform: scale(1.05) rotate(-8deg);
+  }
+
+  .search-btn svg { width: 20px; height: 20px; }
+
+  /* Quick suggestions */
+  .suggestions {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .suggestions .lead {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--umber);
+    margin-right: 8px;
+  }
+
+  .chip {
+    background: transparent;
+    border: 1px solid rgba(26, 22, 18, 0.2);
+    border-radius: 100px;
+    padding: 8px 16px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .chip:hover {
+    background: var(--ink);
+    color: var(--bone);
+    border-color: var(--ink);
+  }
+
+  /* ===== FILTERS ===== */
+  .filters {
+    max-width: 1400px;
+    margin: 48px auto 0;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .filter-group .filter-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--umber);
+    margin-bottom: 10px;
+  }
+
+  .filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .filter-pill {
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .filter-pill::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 4px;
+    height: 1px;
+    background: transparent;
+    transition: background 0.2s;
+  }
+
+  .filter-pill:hover { color: var(--ink); }
+  .filter-pill.active { color: var(--terracotta); font-weight: 500; }
+  .filter-pill.active::after { background: var(--terracotta); }
+
+  /* ===== RESULTS ===== */
+  .results-section {
+    max-width: 1400px;
+    margin: 56px auto 0;
+    padding: 0 48px 120px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(26, 22, 18, 0.1);
+  }
+
+  .results-title {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  .results-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .results-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--umber);
+    text-transform: uppercase;
+  }
+
+  /* AI interpretation banner */
+  .ai-reading {
+    background: var(--ink);
+    color: var(--bone);
+    padding: 24px 32px;
+    border-radius: 2px;
+    margin-bottom: 36px;
+    display: none;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .ai-reading.visible { display: grid; }
+
+  .ai-reading .icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    display: grid;
+    place-items: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+  }
+
+  .ai-reading .content .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .ai-reading .content .text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--bone);
+  }
+
+  .ai-reading .tags {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .ai-tag-mini {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border: 1px solid rgba(244, 239, 230, 0.3);
+    border-radius: 100px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ===== TILE GRID ===== */
+  .tile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .tile-card {
+    background: var(--bone-deep);
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: rise 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .tile-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 50px -20px rgba(26, 22, 18, 0.25);
+  }
+
+  .tile-preview {
+    aspect-ratio: 4/5;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tile-preview svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tile-card:hover .tile-preview svg { transform: scale(1.05); }
+
+  .tile-meta {
+    padding: 20px 22px 24px;
+    background: var(--bone);
+  }
+
+  .tile-meta .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+
+  .tile-name {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  .tile-name em { font-style: italic; }
+
+  .tile-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--umber);
+  }
+
+  .tile-desc {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .tile-specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(26, 22, 18, 0.08);
+  }
+
+  .spec {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--umber);
+    padding: 3px 8px;
+    background: rgba(26, 22, 18, 0.05);
+    border-radius: 2px;
+  }
+
+  .tile-price {
+    margin-top: 14px;
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .tile-price .from {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.2em;
+    color: var(--umber);
+    text-transform: uppercase;
+  }
+
+  .tile-price .amount em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  /* Match score */
+  .match-score {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(26, 22, 18, 0.85);
+    backdrop-filter: blur(8px);
+    color: var(--bone);
+    padding: 6px 10px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    display: none;
+  }
+
+  .match-score.visible { display: block; }
+
+  .match-score .pct {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* Empty state */
+  .empty {
+    text-align: center;
+    padding: 80px 0;
+    display: none;
+  }
+
+  .empty.visible { display: block; }
+
+  .empty h3 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .empty p {
+    color: var(--umber);
+    font-size: 15px;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid rgba(26, 22, 18, 0.1);
+    padding: 40px 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--umber);
+  }
+
+  footer em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; padding: 60px 32px 40px; }
+    .hero-aside { border-left: none; border-top: 1px solid rgba(26, 22, 18, 0.15); padding-left: 0; padding-top: 24px; }
+    .search-section, .filters, .results-section { padding-left: 32px; padding-right: 32px; }
+    .filters { grid-template-columns: repeat(2, 1fr); }
+    .tile-grid { grid-template-columns: repeat(2, 1fr); }
+    header { padding: 24px 32px; }
+    nav { gap: 20px; }
+    .established { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    header { padding: 20px; flex-wrap: wrap; gap: 16px; }
+    nav { width: 100%; justify-content: flex-start; gap: 16px; }
+    .hero { padding: 40px 20px 30px; }
+    .search-section, .filters, .results-section { padding-left: 20px; padding-right: 20px; }
+    .search-panel { padding: 24px; }
+    #searchInput { font-size: 20px; padding-right: 60px; }
+    .search-btn { width: 44px; height: 44px; }
+    .filters { grid-template-columns: 1fr; gap: 16px; }
+    .tile-grid { grid-template-columns: 1fr; gap: 20px; }
+    .results-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .ai-reading { padding: 20px; grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 20px; }
+  }
+
+  /* Loading shimmer */
+  .loading-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    align-items: center;
+    display: none;
+  }
+
+  .loading-row.visible { display: flex; }
+
+  .dot-loader {
+    display: inline-flex;
+    gap: 4px;
+  }
+  .dot-loader span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    animation: bounce 1.2s infinite ease-in-out both;
+  }
+  .dot-loader span:nth-child(2) { animation-delay: 0.15s; }
+  .dot-loader span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes bounce {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  .thinking-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--umber);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-mark">v</div>
+    <div class="brand-text">
+      <div class="name">Venus Ceramics</div>
+      <div class="tag">Atelier of Surfaces</div>
+    </div>
+  </div>
+  <nav>
+    <a href="#">Collections</a>
+    <a href="#">Materials</a>
+    <a href="#">Trade</a>
+    <a href="#">Atelier</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="established">Est. MCMLXXXII</div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <div class="eyebrow">AI-Guided Tile Discovery</div>
+    <h1>Find the surface<br>you've been <em>imagining.</em></h1>
+  </div>
+  <div class="hero-aside">
+    <p>Describe a feeling, a room, a memory — our atelier's AI will translate it into stone, clay, and glaze.</p>
+    <div class="meta">04 Collections · 247 Surfaces · 12 Finishes</div>
+  </div>
+</section>
+
+<section class="search-section">
+  <div class="search-panel">
+    <div class="search-header">
+      <div class="label">Describe your vision</div>
+      <div class="ai-tag"><span class="ai-dot"></span> Atelier Intelligence</div>
+    </div>
+    <div class="search-input-wrap">
+      <input type="text" id="searchInput" placeholder="warm, hand-glazed tiles for a sunlit kitchen backsplash…" autocomplete="off">
+      <button class="search-btn" id="searchBtn" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </button>
+    </div>
+    <div class="loading-row" id="loadingRow">
+      <div class="dot-loader"><span></span><span></span><span></span></div>
+      <span class="thinking-text" id="thinkingText">Reading your vision…</span>
+    </div>
+    <div class="suggestions">
+      <span class="lead">Try</span>
+      <button class="chip" data-q="rough terracotta for a Mediterranean courtyard">Mediterranean courtyard</button>
+      <button class="chip" data-q="smooth matte black bathroom floor">Matte black bath</button>
+      <button class="chip" data-q="glossy white subway with subtle texture">Glossy subway</button>
+      <button class="chip" data-q="green marble veined and polished for a lobby">Veined green marble</button>
+      <button class="chip" data-q="rustic stone outdoor patio sand colored">Rustic outdoor stone</button>
+    </div>
+  </div>
+</section>
+
+<section class="filters">
+  <div class="filter-group">
+    <div class="filter-label">Texture</div>
+    <div class="filter-options" data-group="texture">
+      <button class="filter-pill" data-val="smooth">Smooth</button>
+      <button class="filter-pill" data-val="matte">Matte</button>
+      <button class="filter-pill" data-val="glossy">Glossy</button>
+      <button class="filter-pill" data-val="rough">Rough</button>
+      <button class="filter-pill" data-val="textured">Textured</button>
+      <button class="filter-pill" data-val="hand-glazed">Hand-glazed</button>
+    </div>
+  </div>
+  <div class="filter-group">
+    <div class="filter-label">Material</div>
+    <div class="filter-options" data-group="material">
+      <button class="filter-pill" data-val="porcelain">Porcelain</button>
+      <button class="filter-pill" data-val="ceramic">Ceramic</button>
+      <button class="filter-pill" data-val="terracotta">Terracotta</button>
+      <button class="filter-pill" data-val="marble">Marble</button>
+      <button class="filter-pill" data-val="stone">Stone</button>
+      <button class="filter-pill" data-val="glass">Glass</button>
+    </div>
+  </div>
+  <div class="filter-group">
+    <div class="filter-label">Color</div>
+    <div class="filter-options" data-group="color">
+      <button class="filter-pill" data-val="white">White</button>
+      <button class="filter-pill" data-val="black">Black</button>
+      <button class="filter-pill" data-val="warm">Warm</button>
+      <button class="filter-pill" data-val="cool">Cool</button>
+      <button class="filter-pill" data-val="earth">Earth</button>
+      <button class="filter-pill" data-val="green">Green</button>
+    </div>
+  </div>
+  <div class="filter-group">
+    <div class="filter-label">Room</div>
+    <div class="filter-options" data-group="room">
+      <button class="filter-pill" data-val="kitchen">Kitchen</button>
+      <button class="filter-pill" data-val="bathroom">Bathroom</button>
+      <button class="filter-pill" data-val="floor">Floor</button>
+      <button class="filter-pill" data-val="outdoor">Outdoor</button>
+      <button class="filter-pill" data-val="commercial">Commercial</button>
+    </div>
+  </div>
+</section>
+
+<section class="results-section">
+  <div class="ai-reading" id="aiReading">
+    <div class="icon">v</div>
+    <div class="content">
+      <div class="label">Atelier's Reading</div>
+      <div class="text" id="aiReadingText"></div>
+      <div class="tags" id="aiReadingTags"></div>
+    </div>
+  </div>
+
+  <div class="results-header">
+    <div class="results-title">The <em>Collection</em></div>
+    <div class="results-count" id="resultsCount">Showing all 12 surfaces</div>
+  </div>
+
+  <div class="tile-grid" id="tileGrid"></div>
+  <div class="empty" id="empty">
+    <h3>No surface matches that vision.</h3>
+    <p>Try softer language, or remove a filter to widen the search.</p>
+  </div>
+</section>
+
+<footer>
+  <div>Venus Ceramics · Via dei Ceramisti 14, Sassuolo</div>
+  <em>Made by hand, sorted by machine.</em>
+  <div>© MMXXVI</div>
+</footer>
+
+<script>
+// ============= TILE CATALOG =============
+const tiles = [
+  {
+    id: 'VC-001', name: 'Terra Antica', desc: 'Sun-baked terracotta with a faintly weathered hand — a memory of Tuscan courtyards.',
+    material: 'terracotta', texture: ['rough','textured','hand-glazed'], color: ['warm','earth'], room: ['floor','outdoor','kitchen'],
+    price: 42, palette: ['#b87654','#a05a3c','#d49872'], pattern: 'terracotta',
+    mood: ['mediterranean','rustic','warm','organic','sun-baked','aged']
+  },
+  {
+    id: 'VC-002', name: 'Nero Pietra', desc: 'Deep volcanic black with a velvet matte finish that absorbs light like quiet linen.',
+    material: 'porcelain', texture: ['matte','smooth'], color: ['black','cool'], room: ['bathroom','floor','commercial'],
+    price: 68, palette: ['#1a1612','#2a2622','#0f0d0a'], pattern: 'solid-dark',
+    mood: ['modern','minimal','dramatic','dark','sophisticated','spa']
+  },
+  {
+    id: 'VC-003', name: 'Bianco Maestro', desc: 'Classic glossy white subway with the gentlest crackle — never sterile, always alive.',
+    material: 'ceramic', texture: ['glossy','smooth','hand-glazed'], color: ['white'], room: ['kitchen','bathroom'],
+    price: 28, palette: ['#f5f1ea','#ffffff','#e8e2d4'], pattern: 'subway',
+    mood: ['classic','clean','timeless','traditional','bright','versatile']
+  },
+  {
+    id: 'VC-004', name: 'Verde Calacatta', desc: 'Polished marble veined in sage and cream — a forest preserved under glass.',
+    material: 'marble', texture: ['glossy','smooth'], color: ['green','cool'], room: ['bathroom','floor','commercial'],
+    price: 145, palette: ['#7a8471','#e8e3d4','#5a6453'], pattern: 'marble-green',
+    mood: ['luxurious','elegant','statement','natural','veined','lobby']
+  },
+  {
+    id: 'VC-005', name: 'Sabbia', desc: 'A pressed-stone tile in pale sand — the floor of a Greek terrace at dusk.',
+    material: 'stone', texture: ['rough','textured','matte'], color: ['warm','earth'], room: ['outdoor','floor'],
+    price: 38, palette: ['#d4c4a8','#bfae8e','#e2d5bd'], pattern: 'stone-sand',
+    mood: ['rustic','outdoor','natural','warm','patio','mediterranean']
+  },
+  {
+    id: 'VC-006', name: 'Bosco', desc: 'Deep forest porcelain in a long plank format — wood\'s soul, ceramic\'s endurance.',
+    material: 'porcelain', texture: ['matte','textured'], color: ['green','earth'], room: ['floor','kitchen','commercial'],
+    price: 56, palette: ['#3a4a36','#2a3826','#4d5d49'], pattern: 'wood-grain',
+    mood: ['natural','organic','grounded','wood-look','contemporary']
+  },
+  {
+    id: 'VC-007', name: 'Onda', desc: 'A handmade zellige with rolling glaze pools — every tile its own small ocean.',
+    material: 'ceramic', texture: ['hand-glazed','glossy','textured'], color: ['cool','green'], room: ['kitchen','bathroom'],
+    price: 88, palette: ['#5a8a8c','#7aa8aa','#3e6c6e'], pattern: 'zellige',
+    mood: ['handmade','artisan','moroccan','glazed','organic','imperfect']
+  },
+  {
+    id: 'VC-008', name: 'Carrara Eterno', desc: 'Italian white marble, polished to a soft mirror. Gentle gray veins like distant rain.',
+    material: 'marble', texture: ['glossy','smooth'], color: ['white','cool'], room: ['bathroom','floor','commercial'],
+    price: 168, palette: ['#ece8e0','#ffffff','#c8c4ba'], pattern: 'marble-white',
+    mood: ['luxurious','classic','italian','elegant','timeless','statement']
+  },
+  {
+    id: 'VC-009', name: 'Cotto Rosato', desc: 'Hand-pressed terracotta in soft pink-clay — for kitchens that want to feel lived-in.',
+    material: 'terracotta', texture: ['matte','textured','hand-glazed'], color: ['warm','earth'], room: ['kitchen','floor'],
+    price: 52, palette: ['#c87f6e','#b06856','#dba291'], pattern: 'terracotta-pink',
+    mood: ['rustic','warm','lived-in','farmhouse','artisan','soft']
+  },
+  {
+    id: 'VC-010', name: 'Vetro Nero', desc: 'Hand-blown glass mosaic in graphite — a wall that catches candlelight like wet ink.',
+    material: 'glass', texture: ['glossy','smooth'], color: ['black','cool'], room: ['bathroom','kitchen','commercial'],
+    price: 124, palette: ['#1a1612','#2c2824','#3e3a36'], pattern: 'mosaic-dark',
+    mood: ['modern','dramatic','luxurious','sparkle','statement']
+  },
+  {
+    id: 'VC-011', name: 'Avorio', desc: 'Bone-white porcelain with a sandstone hand — quiet, warm, and forgiving of light.',
+    material: 'porcelain', texture: ['matte','textured'], color: ['white','warm'], room: ['bathroom','floor','kitchen'],
+    price: 48, palette: ['#ede5d4','#f4ecdc','#d8cfba'], pattern: 'stone-cream',
+    mood: ['warm','soft','minimal','contemporary','versatile','calm']
+  },
+  {
+    id: 'VC-012', name: 'Lava di Sicilia', desc: 'Raw volcanic stone in deep charcoal — for floors that want to feel ancient.',
+    material: 'stone', texture: ['rough','textured','matte'], color: ['black','cool','earth'], room: ['floor','outdoor','commercial'],
+    price: 76, palette: ['#2a2622','#3a3632','#1c1814'], pattern: 'lava',
+    mood: ['raw','dramatic','natural','ancient','outdoor','grounding']
+  }
+];
+
+// ============= SVG PATTERN GENERATORS =============
+function pattern(p, palette) {
+  const [c1, c2, c3] = palette;
+  const seed = p.charCodeAt(0) + p.length;
+  
+  switch(p) {
+    case 'terracotta':
+    case 'terracotta-pink':
+      return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="rough${seed}"><feTurbulence baseFrequency="0.7" numOctaves="3" seed="${seed}"/><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"/><feComposite in="SourceGraphic" operator="in"/></filter>
+          <radialGradient id="g${seed}" cx="30%" cy="30%"><stop offset="0%" stop-color="${c3}"/><stop offset="100%" stop-color="${c1}"/></radialGradient>
+        </defs>
+        <rect width="200" height="250" fill="url(#g${seed})"/>
+        <rect width="200" height="250" fill="${c2}" filter="url(#rough${seed})" opacity="0.4"/>
+        ${Array.from({length:80},(_,i)=>`<circle cx="${(seed*i)%200}" cy="${(seed*i*3)%250}" r="${1+i%2}" fill="${c2}" opacity="0.15"/>`).join('')}
+      </svg>`;
+    
+    case 'solid-dark':
+      return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="g${seed}" cx="40%" cy="35%"><stop offset="0%" stop-color="${c2}"/><stop offset="100%" stop-color="${c3}"/></radialGradient></defs>
+        <rect width="200" height="250" fill="url(#g${seed})"/>
+        <rect width="200" height="250" fill="${c1}" opacity="0.2"/>
+      </svg>`;
+    
+    case 'subway':
+      return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g${seed}" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c2}"/><stop offset="100%" stop-color="${c1}"/></linearGradient>
+        </defs>
+        <rect width="200" height="250" fill="url(#g${seed})"/>
+        ${[0,1,2,3,4,5].map(r=>{const y=r*42;const off=r%2?0:-50;return [0,1,2,3].map(c=>`<rect x="${c*100+off}" y="${y}" width="96" height="38" fill="${c2}" stroke="${c3}" stroke-width="1.5"/>`).join('');}).join('')}
+        <rect width="200" height="250" fill="url(#g${seed})" opacity="0.3"/>
+      </svg>`;
+    
+    case 'marble-green':
+      return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="t${seed}"><feTurbulence baseFrequency="0.015" numOctaves="4" seed="${seed}"/><feDisplacementMap in="SourceGraphic" scale="40"/></filter>
+        </defs>
+        <rect width="200" height="250" fill="${c2}"/>
+        <g filter="url(#t${seed})">
+          <path d="M-20 80 Q 80 60 220 100 L 220 130 Q 80 110 -20 130 Z" fill="${c1}" opacity="0.6"/>
+          <path d="M-20 150 Q 100 130 220 180 L 220 200 Q 100 180 -20 200 Z" fill="${c3}" opacity="0.5"/>
+          <path d="M40 -20 Q 60 80 80 270 L 100 270 Q 80 80 60 -20 Z" fill="${c1}" opacity="0.3"/>
+        </g>
+      </svg>`;
+    
+    case 'marble-white':
+      return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="t${seed}"><feTurbulence baseFrequency="0.02" numOctaves="3" seed="${seed}"/><feDisplacementMap in="SourceGraphic" scale="30"/></filter>
+        </defs>
+        <rect width="200" height="250" fill="${c2}"/>
+        <g filter="url(#t${seed})" opacity="0.5">
+          <path d="M-20 60 Q 80 50 220 90 L 220 100 Q 80 90 -20 100 Z" fill="${c3}"/>
+          <path d="M-20 140 Q 60 120 220 170 L 220 180 Q 60 150 -20 175 Z" fill="${c3}" opacity="0.7"/>
+          <path d="M120 -20 Q 130 80 110 270 L 120 270 Q 140 80 130 -20 Z" fill="${c3}" opacity="0.4"/>
+        </g>
+      </svg>`;
+    
+    case 'stone-sand':
+    case 'stone-cream':
+      return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="r${seed}"><feTurbulence baseFrequency="0.4" numOctaves="4" seed="${seed}"/><feColorMatrix values="0 0 0 0 0.55 0 0 0 0 0.45 0 0 0 0 0.32 0 0 0 0.5 0"/></filter>
+          <linearGradient id="g${seed}" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${c3}"/><stop offset="100%" stop-color="${c1}"/></linearGradient>
+        </defs>
+        <rect width="200" height="250" fill="url(#g${seed})"/>
+        <rect width="200" height="250" filter="url(#r${seed})" opacity="0.6"/>
+        ${Array.from({length:30},(_,i)=>`<circle cx="${(seed*i*7)%200}" cy="${(seed*i*11)%250}" r="${1+(i%3)}" fill="${c2}" opacity="0.4"/>`).join('')}
+      </svg>`;
+    
+    case 'wood-grain':
+      return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="w${seed}"><feTurbulence baseFrequency="0.01 0.4" numOctaves="3" seed="${seed}"/><feColorMatrix values="0 0 0 0 0.15 0 0 0 0 0.2 0 0 0 0 0.15 0 0 0 0.6 0"/></filter>
+        </defs>
+        <rect width="200" height="250" fill="${c1}"/>
+        <rect width="200" height="250" filter="url(#w${seed})" opacity="0.7"/>
+        ${[40,80,120,160].map(y=>`<line x1="0" y1="${y}" x2="200" y2="${y+3}" stroke="${c2}" stroke-width="0.5" opacity="0.4"/>`).join('')}
+      </svg>`;
+    
+    case 'zellige':
+      return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="z1${seed}" cx="30%" cy="30%"><stop offset="0%" stop-color="${c2}"/><stop offset="100%" stop-color="${c1}"/></radialGradient>
+          <radialGradient id="z2${seed}" cx="60%" cy="40%"><stop offset="0%" stop-color="${c2}"/><stop offset="100%" stop-color="${c3}"/></radialGradient>
+          <filter id="zf${seed}"><feTurbulence baseFrequency="0.5" numOctaves="2" seed="${seed}"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter>
+        </defs>
+        <rect width="200" height="250" fill="${c3}"/>
+        <g filter="url(#zf${seed})">
+        ${[0,1,2,3].map(r=>[0,1,2,3].map(c=>{
+          const x=c*50; const y=r*62.5; const grad=(r+c)%2?`z1${seed}`:`z2${seed}`;
+          return `<rect x="${x+1}" y="${y+1}" width="48" height="60" fill="url(#${grad})"/>`;
+        }).join('')).join('')}
+        </g>
+        <rect width="200" height="250" fill="${c2}" opacity="0.1"/>
+      </svg>`;
+    
+    case 'mosaic-dark':
+      return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <rect width="200" height="250" fill="${c3}"/>
+        ${Array.from({length:10},(_,r)=>Array.from({length:8},(_,c)=>{
+          const colors=[c1,c2,c3]; const fill=colors[(r+c+seed)%3];
+          return `<rect x="${c*25+1}" y="${r*25+1}" width="23" height="23" fill="${fill}" opacity="${0.7+(r+c)%2*0.3}"/>`;
+        }).join('')).join('')}
+      </svg>`;
+    
+    case 'lava':
+      return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="l${seed}"><feTurbulence baseFrequency="0.8" numOctaves="4" seed="${seed}"/><feColorMatrix values="0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.6 0"/></filter>
+        </defs>
+        <rect width="200" height="250" fill="${c3}"/>
+        <rect width="200" height="250" filter="url(#l${seed})" opacity="0.9"/>
+        ${Array.from({length:50},(_,i)=>`<circle cx="${(seed*i*13)%200}" cy="${(seed*i*17)%250}" r="${0.5+(i%4)*0.5}" fill="${c2}" opacity="0.3"/>`).join('')}
+      </svg>`;
+    
+    default:
+      return `<svg viewBox="0 0 200 250"><rect width="200" height="250" fill="${c1}"/></svg>`;
+  }
+}
+
+// ============= AI SEARCH ENGINE =============
+// Local semantic matcher: maps natural language to tile attributes via mood/keyword fingerprinting
+const lexicon = {
+  // moods/feelings -> attribute weights
+  warm: { color:['warm','earth'], mood:['warm','sun-baked','soft'] },
+  cool: { color:['cool','green','black'], mood:['minimal','spa'] },
+  cozy: { texture:['hand-glazed','textured','rough'], mood:['warm','soft','lived-in','farmhouse'] },
+  rustic: { material:['terracotta','stone'], texture:['rough','textured'], mood:['rustic','aged','farmhouse'] },
+  modern: { texture:['smooth','matte','glossy'], mood:['modern','minimal','contemporary'] },
+  minimal: { texture:['matte','smooth'], mood:['minimal','clean','calm'] },
+  luxury: { material:['marble','glass'], texture:['glossy'], mood:['luxurious','elegant','statement'] },
+  luxurious: { material:['marble','glass'], texture:['glossy'], mood:['luxurious','elegant','statement'] },
+  elegant: { material:['marble'], mood:['elegant','timeless','sophisticated'] },
+  artisan: { texture:['hand-glazed'], mood:['handmade','artisan','imperfect'] },
+  handmade: { texture:['hand-glazed'], mood:['handmade','artisan'] },
+  industrial: { material:['stone','porcelain'], color:['black'], mood:['raw','dramatic'] },
+  mediterranean: { material:['terracotta','stone'], color:['warm','earth'], mood:['mediterranean','sun-baked','rustic'] },
+  tuscan: { material:['terracotta'], color:['warm','earth'], mood:['mediterranean','rustic','aged'] },
+  scandinavian: { color:['white','cool'], texture:['matte','smooth'], mood:['minimal','clean','calm'] },
+  moroccan: { texture:['hand-glazed'], mood:['moroccan','handmade','artisan'] },
+  spa: { color:['white','cool','green'], texture:['matte','smooth'], mood:['spa','calm','sophisticated'] },
+  dramatic: { color:['black'], mood:['dramatic','statement','dark'] },
+  bright: { color:['white'], mood:['bright','clean'] },
+  dark: { color:['black'], mood:['dark','dramatic'] },
+  sunlit: { color:['warm'], mood:['warm','sun-baked','bright'] },
+  natural: { material:['stone','terracotta'], mood:['natural','organic','grounded'] },
+  organic: { mood:['organic','natural','imperfect'] },
+  textured: { texture:['textured','rough','hand-glazed'] },
+  smooth: { texture:['smooth','matte','glossy'] },
+  glossy: { texture:['glossy'] },
+  matte: { texture:['matte'] },
+  rough: { texture:['rough','textured'] },
+  veined: { material:['marble'], mood:['veined','statement'] },
+  polished: { texture:['glossy','smooth'] },
+  // colors
+  white: { color:['white'] },
+  black: { color:['black'] },
+  green: { color:['green'] },
+  sage: { color:['green'] },
+  forest: { color:['green'] },
+  charcoal: { color:['black'] },
+  cream: { color:['white','warm'] },
+  bone: { color:['white','warm'] },
+  sand: { color:['warm','earth'] },
+  beige: { color:['warm','earth'] },
+  terracotta: { material:['terracotta'], color:['warm','earth'] },
+  clay: { material:['terracotta'], color:['warm','earth'] },
+  // materials
+  marble: { material:['marble'] },
+  porcelain: { material:['porcelain'] },
+  ceramic: { material:['ceramic'] },
+  stone: { material:['stone'] },
+  glass: { material:['glass'] },
+  zellige: { texture:['hand-glazed'], mood:['moroccan','handmade'] },
+  mosaic: { mood:['mosaic'] },
+  subway: { mood:['classic'] },
+  // rooms
+  kitchen: { room:['kitchen'] },
+  bathroom: { room:['bathroom'] },
+  bath: { room:['bathroom'] },
+  shower: { room:['bathroom'] },
+  backsplash: { room:['kitchen'] },
+  floor: { room:['floor'] },
+  flooring: { room:['floor'] },
+  outdoor: { room:['outdoor'] },
+  patio: { room:['outdoor'] },
+  courtyard: { room:['outdoor'] },
+  terrace: { room:['outdoor'] },
+  lobby: { room:['commercial'], mood:['statement','luxurious'] },
+  commercial: { room:['commercial'] },
+  hotel: { room:['commercial'] },
+};
+
+function interpret(query) {
+  const q = query.toLowerCase();
+  const matched = { texture:[], material:[], color:[], room:[], mood:[] };
+  const found = [];
+
+  for (const [word, attrs] of Object.entries(lexicon)) {
+    if (q.includes(word)) {
+      found.push(word);
+      for (const [k, vals] of Object.entries(attrs)) {
+        vals.forEach(v => { if (!matched[k].includes(v)) matched[k].push(v); });
+      }
+    }
+  }
+  return { matched, foundWords: found };
+}
+
+function scoreTile(tile, matched, activeFilters) {
+  let score = 0;
+  let possible = 0;
+
+  // Active filter pills are hard requirements (boost heavily, penalize if missing)
+  for (const [group, vals] of Object.entries(activeFilters)) {
+    if (vals.length === 0) continue;
+    const tileVals = Array.isArray(tile[group]) ? tile[group] : [tile[group]];
+    const overlap = vals.filter(v => tileVals.includes(v));
+    if (overlap.length === 0) return -1; // hard reject
+    score += overlap.length * 10;
+  }
+
+  // Natural language matching (soft scoring)
+  for (const [group, vals] of Object.entries(matched)) {
+    if (vals.length === 0) continue;
+    possible += vals.length;
+    const tileVals = Array.isArray(tile[group]) ? tile[group] : [tile[group]];
+    const overlap = vals.filter(v => tileVals.includes(v));
+    score += overlap.length * (group === 'mood' ? 2 : 3);
+  }
+
+  return score;
+}
+
+function aiSearch(query, activeFilters) {
+  const hasQuery = query && query.trim().length > 0;
+  const hasFilters = Object.values(activeFilters).some(v => v.length > 0);
+
+  if (!hasQuery && !hasFilters) {
+    return { results: tiles.map(t => ({...t, _score:0})), interpretation: null };
+  }
+
+  const { matched, foundWords } = hasQuery ? interpret(query) : { matched:{texture:[],material:[],color:[],room:[],mood:[]}, foundWords:[] };
+  
+  const scored = tiles.map(t => ({...t, _score: scoreTile(t, matched, activeFilters)}))
+                      .filter(t => t._score >= 0);
+
+  if (hasQuery) {
+    scored.sort((a,b) => b._score - a._score);
+  }
+
+  // Build interpretation summary
+  let interpretation = null;
+  if (hasQuery) {
+    const allTags = [...new Set([...matched.texture, ...matched.material, ...matched.color, ...matched.room, ...matched.mood.slice(0,3)])];
+    interpretation = {
+      reading: buildReading(query, matched, foundWords),
+      tags: allTags.slice(0, 8)
+    };
+  }
+
+  return { results: scored, interpretation };
+}
+
+function buildReading(query, matched, foundWords) {
+  const parts = [];
+  if (matched.mood.length) parts.push(`a ${matched.mood.slice(0,2).join(', ')} feeling`);
+  if (matched.material.length) parts.push(matched.material.join(' or ') + ' surface');
+  if (matched.texture.length) parts.push(`with a ${matched.texture.slice(0,2).join(' / ')} hand`);
+  if (matched.color.length) parts.push(`in ${matched.color.slice(0,2).join(' or ')} tones`);
+  if (matched.room.length) parts.push(`for ${matched.room[0]} application`);
+
+  if (parts.length === 0) return `I'm not certain I caught your intent — showing surfaces that may resonate.`;
+  return `You're describing ${parts.join(', ')}. Here's what the atelier suggests.`;
+}
+
+// ============= STATE & RENDERING =============
+const state = {
+  query: '',
+  filters: { texture:[], material:[], color:[], room:[] }
+};
+
+const grid = document.getElementById('tileGrid');
+const aiReading = document.getElementById('aiReading');
+const aiReadingText = document.getElementById('aiReadingText');
+const aiReadingTags = document.getElementById('aiReadingTags');
+const resultsCount = document.getElementById('resultsCount');
+const empty = document.getElementById('empty');
+
+function renderTile(t, idx, showScore) {
+  const card = document.createElement('div');
+  card.className = 'tile-card';
+  card.style.animationDelay = `${idx * 60}ms`;
+  
+  const scoreHTML = showScore && t._score > 0 
+    ? `<div class="match-score visible">Match <span class="pct">${Math.min(99, Math.round(t._score * 8))}%</span></div>` 
+    : '';
+  
+  card.innerHTML = `
+    <div class="tile-preview">
+      ${pattern(t.pattern, t.palette)}
+      ${scoreHTML}
+    </div>
+    <div class="tile-meta">
+      <div class="top-row">
+        <div class="tile-name"><em>${t.name.split(' ')[0]}</em> ${t.name.split(' ').slice(1).join(' ')}</div>
+        <div class="tile-code">${t.id}</div>
+      </div>
+      <div class="tile-desc">${t.desc}</div>
+      <div class="tile-specs">
+        <span class="spec">${t.material}</span>
+        ${t.texture.slice(0,2).map(x=>`<span class="spec">${x}</span>`).join('')}
+        <span class="spec">${t.room[0]}</span>
+      </div>
+      <div class="tile-price">
+        <span class="from">From</span>
+        <span class="amount">€<em>${t.price}</em>/m²</span>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+function render() {
+  const { results, interpretation } = aiSearch(state.query, state.filters);
+  
+  grid.innerHTML = '';
+  
+  if (results.length === 0) {
+    empty.classList.add('visible');
+    resultsCount.textContent = 'Showing 0 surfaces';
+  } else {
+    empty.classList.remove('visible');
+    const showScore = !!interpretation;
+    results.forEach((t, i) => grid.appendChild(renderTile(t, i, showScore)));
+    resultsCount.textContent = `Showing ${results.length} of ${tiles.length} surfaces`;
+  }
+  
+  if (interpretation) {
+    aiReading.classList.add('visible');
+    aiReadingText.textContent = interpretation.reading;
+    aiReadingTags.innerHTML = interpretation.tags.map(t => `<span class="ai-tag-mini">${t}</span>`).join('');
+  } else {
+    aiReading.classList.remove('visible');
+  }
+}
+
+// ============= EVENT WIRING =============
+const input = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+const loadingRow = document.getElementById('loadingRow');
+const thinkingText = document.getElementById('thinkingText');
+
+const thinkingPhrases = [
+  'Reading your vision…',
+  'Walking the atelier shelves…',
+  'Comparing finishes and hand…',
+  'Selecting surfaces…'
+];
+
+function doSearch() {
+  const q = input.value.trim();
+  state.query = q;
+  
+  if (!q) { render(); return; }
+  
+  loadingRow.classList.add('visible');
+  let i = 0;
+  thinkingText.textContent = thinkingPhrases[0];
+  const cycle = setInterval(() => {
+    i = (i + 1) % thinkingPhrases.length;
+    thinkingText.textContent = thinkingPhrases[i];
+  }, 400);
+  
+  setTimeout(() => {
+    clearInterval(cycle);
+    loadingRow.classList.remove('visible');
+    render();
+    document.querySelector('.results-section').scrollIntoView({behavior:'smooth', block:'start'});
+  }, 900);
+}
+
+searchBtn.addEventListener('click', doSearch);
+input.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+
+// Suggestion chips
+document.querySelectorAll('.chip').forEach(c => {
+  c.addEventListener('click', () => {
+    input.value = c.dataset.q;
+    doSearch();
+  });
+});
+
+// Filter pills
+document.querySelectorAll('.filter-options').forEach(group => {
+  const groupName = group.dataset.group;
+  group.querySelectorAll('.filter-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const val = pill.dataset.val;
+      const arr = state.filters[groupName];
+      const idx = arr.indexOf(val);
+      if (idx === -1) { arr.push(val); pill.classList.add('active'); }
+      else { arr.splice(idx, 1); pill.classList.remove('active'); }
+      render();
+    });
+  });
+});
+
+// Initial render
+render();
+</script>
+</body>
+</html>
